@@ -1,0 +1,57 @@
+{
+  "name": "react-profile-image",
+  "version": "1.0.0",
+  "description": "React Profile image upload",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --mode development",
+    "transpile": "babel src -d dist --copy-files",
+    "prepublishOnly": "npm run transpile",
+    "build": "webpack --mode production",
+    "deploy": "gh-pages -d examples/dist",
+    "publish-demo": "npm run build && npm run deploy",
+    "preversion": "npm test",
+    "version": "npm run build && git add -A dist",
+    "postversion": "git push && git push --tags && rm -rf build/temp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Daym3l/react-profile-image.git"
+  },
+  "keywords": [
+    "gallery",
+    "react",
+    "picker",
+    "image",
+    "selector"
+  ],
+  "author": "Daym3l",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "bugs": {
+    "url": "https://github.com/Daym3l/react-profile-image/issues"
+  },
+  "homepage": "https://github.com/Daym3l/react-profile-image#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^3.0.0",
+    "gh-pages": "^2.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "dependencies": {}
+}
