@@ -1,25 +1,6 @@
-.imgPicker {
-    border: 3px dotted #000;
-    border-radius: 5px;
-    margin: 5px;
-    height: 200px;
-    width: 200px;
-    transition: transform .2s;
+.label-upload {
+  background-color: #f44336;
+  color: #fff;
+  padding: 2px 4px 2px 4px;
+  border-radius: 2px;
 }
-.imgPicker:hover {
-    transform: scale(1.1);
-}
-.selected {
-  border: 3px dotted #4caf50;
-    border-radius: 5px;
-    margin: 5px;
-    height: 200px;
-    width: 200px;
-    opacity: .5
- }
-
- .container {
-    position: relative;
-    width: 100%;
-    display: contents;
- }
