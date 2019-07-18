@@ -20,11 +20,11 @@
     "url": "https://github.com/Daym3l/react-profile-image.git"
   },
   "keywords": [
-    "gallery",
-    "react",
-    "picker",
     "image",
-    "selector"
+    "react",
+    "upload",
+    "camera",
+    "photo"
   ],
   "author": "Daym3l",
   "license": "MIT",
