@@ -38,10 +38,10 @@ const UploadBtn = ({ action, uploadProps, uploadBtnLabel }) => {
 const imageUpload = props => {
   const { styles, camera, defaultImage, returnImage, uploadBtnProps, cameraBtnProps, cancelBtnProps, takeBtnProps } = props;
 
-  const { label: uploadBtnLabel, ...restUploadBtnProps } = uploadBtnProps;
-  const { label: cameraBtnLabel, ...restCameraBtnProps } = cameraBtnProps;
-  const { label: cancelBtnLabel, ...restCancelBtnProps } = cancelBtnProps;
-  const { label: takeBtnLabel, ...restTakeBtnProps } = takeBtnProps;
+  const { label: uploadBtnLabel, onClick: _up, ...restUploadBtnProps } = uploadBtnProps;
+  const { label: cameraBtnLabel, onClick: _cam, ...restCameraBtnProps } = cameraBtnProps;
+  const { label: cancelBtnLabel, onClick: _can, ...restCancelBtnProps } = cancelBtnProps;
+  const { label: takeBtnLabel, onClick: _tak, ...restTakeBtnProps } = takeBtnProps;
 
 
   const classes = useStyles();
@@ -159,10 +159,10 @@ imageUpload.defaultProps = {
   styles: { height: 200, width: 200, margin: 2, border: "2px dashed #263238" },
   camera: false,
   defaultImage: "https://thenounproject.com/term/no-image/25683/",
-  uploadBtnProps: { onCLick: null, label: 'Upload' },
-  cameraBtnProps: { onCLick: null, label: 'Camera' },
-  cancelBtnProps: { onCLick: null, label: 'Cancel' },
-  takeBtnProps: { onCLick: null, label: 'Take' }
+  uploadBtnProps: { onCLick: () => { }, label: 'Upload' },
+  cameraBtnProps: { onCLick: () => { }, label: 'Camera' },
+  cancelBtnProps: { onCLick: () => { }, label: 'Cancel' },
+  takeBtnProps: { onCLick: () => { }, label: 'Take' }
 }
 
 export default imageUpload

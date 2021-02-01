@@ -14,7 +14,10 @@ const App = () => {
     uploadBtnProps={{
       variant: "contained",
       color: "#fff",
-      label: 'Subir'
+      label: 'Subir',
+      onClick: () => {
+        console.log('This Function well never run');
+      }
     }}
   />;
 };
