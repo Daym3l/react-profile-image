@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const UploadBtn = ({ action, uploadProps }) => {
+const UploadBtn = ({ action, uploadProps, uploadBtnLabel }) => {
 
   const classes = useStyles();
   return <React.Fragment>
@@ -29,7 +29,7 @@ const UploadBtn = ({ action, uploadProps }) => {
     />
     <label htmlFor="contained-button-file">
       <Button variant="outlined" color="primary" component="span" className={classes.button} {...uploadProps} >
-        Upload
+        {uploadBtnLabel}
       </Button>
     </label>
   </React.Fragment>
@@ -37,6 +37,12 @@ const UploadBtn = ({ action, uploadProps }) => {
 
 const imageUpload = props => {
   const { styles, camera, defaultImage, returnImage, uploadBtnProps, cameraBtnProps, cancelBtnProps, takeBtnProps } = props;
+
+  const { label: uploadBtnLabel, ...restUploadBtnProps } = uploadBtnProps;
+  const { label: cameraBtnLabel, ...restCameraBtnProps } = cameraBtnProps;
+  const { label: cancelBtnLabel, ...restCancelBtnProps } = cancelBtnProps;
+  const { label: takeBtnLabel, ...restTakeBtnProps } = takeBtnProps;
+
 
   const classes = useStyles();
   const [image, setImage] = React.useState(defaultImage);
@@ -101,7 +107,7 @@ const imageUpload = props => {
 
   }
 
-  const camBtnProp = webCam ? takeBtnProps : cameraBtnProps;
+  const camBtnProp = webCam ? restTakeBtnProps : restCameraBtnProps;
 
   return <div style={{ width: styles.width }}>
     <Grid container spacing={1}>
@@ -118,20 +124,20 @@ const imageUpload = props => {
               color="secondary"
               className={classes.button}
               onClick={cancelPhoto}
-              {...cancelBtnProps}
+              {...restCancelBtnProps}
             >
-              Cancel
+              {cancelBtnLabel}
             </Button>
           )
           : (
-            <UploadBtn action={handlerImage} uploadProps={uploadBtnProps} />
+            <UploadBtn action={handlerImage} uploadProps={restUploadBtnProps} uploadBtnLabel={uploadBtnLabel} />
           )
         }
 
       </Grid>
       {camera && <Grid item xs={6}>
         <Button variant="outlined" color="inherit" className={classes.button} onClick={takePhoto} {...camBtnProp}>
-          {webCam ? "Take" : "Photo"}
+          {webCam ? takeBtnLabel : cameraBtnLabel}
         </Button>
       </Grid>}
     </Grid>
@@ -153,10 +159,10 @@ imageUpload.defaultProps = {
   styles: { height: 200, width: 200, margin: 2, border: "2px dashed #263238" },
   camera: false,
   defaultImage: "https://thenounproject.com/term/no-image/25683/",
-  uploadBtnProps: { onCLick: null },
-  cameraBtnProps: { onCLick: null },
-  cancelBtnProps: { onCLick: null },
-  takeBtnProps: { onCLick: null }
+  uploadBtnProps: { onCLick: null, label: 'Upload' },
+  cameraBtnProps: { onCLick: null, label: 'Camera' },
+  cancelBtnProps: { onCLick: null, label: 'Cancel' },
+  takeBtnProps: { onCLick: null, label: 'Take' }
 }
 
 export default imageUpload

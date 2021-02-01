@@ -13,7 +13,8 @@ const App = () => {
     returnImage={getImage}
     uploadBtnProps={{
       variant: "contained",
-      color: "#fff"
+      color: "#fff",
+      label: 'Subir'
     }}
   />;
 };
