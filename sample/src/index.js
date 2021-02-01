@@ -4,11 +4,19 @@ import ImageUpload from '../../src/index';
 
 const App = () => {
 
-    const getImage = images => {
-        console.log(images);
-    }  
+  const getImage = images => {
+    console.log(images);
+  }
 
-    return 	<ImageUpload camera returnImage={getImage} />;
+  return <ImageUpload
+    camera
+    returnImage={getImage}
+    uploadBtnProps={{
+      variant: "contained",
+      color: "#fff",
+      label: 'Subir'
+    }}
+  />;
 };
 
 
