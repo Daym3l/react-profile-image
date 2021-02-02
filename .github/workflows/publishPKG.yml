@@ -8,14 +8,11 @@ on:
     types: [created]
   workflow_dispatch:
 jobs:
-  release:
-    name: publish
+  publish:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
       - uses: actions/checkout@v2
       # Setup .npmrc file to publish to npm
-      - name: node
       - uses: actions/setup-node@v1
         with:
           node-version: "12.x"
