@@ -13,7 +13,7 @@ const App = () => {
     returnImage={getImage}
     uploadBtnProps={{
       variant: "contained",
-      color: "#fff",
+      //color: "#fff",
       label: 'Subir',
       onClick: () => {
         console.log('This Function well never run');
