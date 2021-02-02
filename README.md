@@ -46,7 +46,7 @@ export default () => {
 - `styles`: React style object for the img tag.(default:{ height: 200, width: 200, margin: 2, border: "2px dashed #263238"}),
 - `camera`: bool if you want take photos,
 - `defaultImage`: default image for the component,
-- `returnImage`: (required) Function that returns a base64 of the photo or image,
+- `returnImage`: (required) Callback function that recieves the base64 photo or image,
 - `uploadBtnProps`: Object of type ButtonProps of material-ui, and "label" property to change the button text. IMPORTANT: "onClick" event will not work here,
 - `cameraBtnProps`: Object of type ButtonProps of material-ui, and "label" property to change the button text. IMPORTANT: "onClick" event will not work here,
 - `cancelBtnProps`: Object of type ButtonProps of material-ui, and "label" property to change the button text. IMPORTANT: "onClick" event will not work here,
