@@ -26,18 +26,18 @@ Need more? See [`sample/src/index.js`](https://github.com/Daym3l/react-profile-i
 import ProfileImage from "react-profile-image";
 
 export default () => {
-  const getImages = image => {
-    // Do something with the selected image)
-    console.log(image);
-  };
+	const getImages = (image) => {
+		// Do something with the selected image)
+		console.log(image);
+	};
 
-  return (
-    <ProfileImage
-      camera
-      returnImage={getImages}
-      uploadBtnProps={{ variant: "contained", label: "Up" }}
-    />
-  );
+	return (
+		<ProfileImage
+			camera
+			returnImage={getImages}
+			uploadBtnProps={{ variant: "contained", label: "Up" }}
+		/>
+	);
 };
 ```
 
@@ -46,11 +46,15 @@ export default () => {
 - `styles`: React style object for the img tag.(default:{ height: 200, width: 200, margin: 2, border: "2px dashed #263238"}),
 - `camera`: bool if you want take photos,
 - `defaultImage`: default image for the component,
-- `returnImage`: (required) Callback function that recieves the base64 photo or image,
+- `returnImage`: (required) Callback function that recieves the base64/file photo or image,
 - `uploadBtnProps`: Object of type ButtonProps of material-ui, and "label" property to change the button text. IMPORTANT: "onClick" event will not work here,
 - `cameraBtnProps`: Object of type ButtonProps of material-ui, and "label" property to change the button text. IMPORTANT: "onClick" event will not work here,
 - `cancelBtnProps`: Object of type ButtonProps of material-ui, and "label" property to change the button text. IMPORTANT: "onClick" event will not work here,
-- `takeBtnProps`: Object of type ButtonProps of material-ui, and "label" property to change the button text. IMPORTANT: "onClick" event will not work here
+- `takeBtnProps`: Object of type ButtonProps of material-ui, and "label" property to change the button text. IMPORTANT: "onClick" event will not work here,
+- `maxImgSize`: Max image size in bytes. (number),
+- `sizeErrorMsg`: Error message to display when the image size is exceeded,
+- `isNotImgErrorMsg`: Error message to display when the selected file to upload is not a image,
+- `imageType`: Defines the type of the image ('base64' | 'file' ) that is going to recieve the "defaultImage(image)" callback function. By default is 'base64'.
 
 # Build the example locally
 
