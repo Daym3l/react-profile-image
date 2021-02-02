@@ -15,7 +15,7 @@ Features of `react-profile-image`
 ## Getting started
 
 ```
-npm install react-profile-image
+npm i @daym3l/react-profile-image
 ```
 
 ### Example

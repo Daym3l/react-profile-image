@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8,31 +8,29 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
+var _propTypes = require("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _makeStyles = require('@material-ui/core/styles/makeStyles');
+var _makeStyles = require("@material-ui/core/styles/makeStyles");
 
 var _makeStyles2 = _interopRequireDefault(_makeStyles);
 
-var _Grid = require('@material-ui/core/Grid');
+var _Grid = require("@material-ui/core/Grid");
 
 var _Grid2 = _interopRequireDefault(_Grid);
 
-var _Button = require('@material-ui/core/Button');
+var _Button = require("@material-ui/core/Button");
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _reactWebcam = require('react-webcam');
+var _reactWebcam = require("react-webcam");
 
 var _reactWebcam2 = _interopRequireDefault(_reactWebcam);
-
-require('./Style.css');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44,7 +42,13 @@ var useStyles = (0, _makeStyles2.default)(function (theme) {
       marginLeft: theme.spacing(1)
     },
     input: {
-      display: 'none'
+      display: "none"
+    },
+    upload: {
+      backgroundColor: "#f44336",
+      color: "#fff",
+      padding: "2px 4px 2px 4px",
+      borderRadius: "2px"
     }
   };
 });
@@ -54,24 +58,28 @@ var UploadBtn = function UploadBtn(_ref) {
       uploadProps = _ref.uploadProps,
       uploadBtnLabel = _ref.uploadBtnLabel;
 
-
   var classes = useStyles();
   return _react2.default.createElement(
     _react2.default.Fragment,
     null,
-    _react2.default.createElement('input', {
-      accept: 'image/*',
+    _react2.default.createElement("input", {
+      accept: "image/*",
       className: classes.input,
-      id: 'contained-button-file',
+      id: "contained-button-file",
       onChange: action,
-      type: 'file'
+      type: "file"
     }),
     _react2.default.createElement(
-      'label',
-      { htmlFor: 'contained-button-file' },
+      "label",
+      { htmlFor: "contained-button-file" },
       _react2.default.createElement(
         _Button2.default,
-        _extends({ variant: 'outlined', color: 'primary', component: 'span', className: classes.button }, uploadProps),
+        _extends({
+          variant: "outlined",
+          color: "primary",
+          component: "span",
+          className: classes.button
+        }, uploadProps),
         uploadBtnLabel
       )
     )
@@ -90,19 +98,19 @@ var imageUpload = function imageUpload(props) {
 
   var uploadBtnLabel = uploadBtnProps.label,
       _up = uploadBtnProps.onClick,
-      restUploadBtnProps = _objectWithoutProperties(uploadBtnProps, ['label', 'onClick']);
+      restUploadBtnProps = _objectWithoutProperties(uploadBtnProps, ["label", "onClick"]);
 
   var cameraBtnLabel = cameraBtnProps.label,
       _cam = cameraBtnProps.onClick,
-      restCameraBtnProps = _objectWithoutProperties(cameraBtnProps, ['label', 'onClick']);
+      restCameraBtnProps = _objectWithoutProperties(cameraBtnProps, ["label", "onClick"]);
 
   var cancelBtnLabel = cancelBtnProps.label,
       _can = cancelBtnProps.onClick,
-      restCancelBtnProps = _objectWithoutProperties(cancelBtnProps, ['label', 'onClick']);
+      restCancelBtnProps = _objectWithoutProperties(cancelBtnProps, ["label", "onClick"]);
 
   var takeBtnLabel = takeBtnProps.label,
       _tak = takeBtnProps.onClick,
-      restTakeBtnProps = _objectWithoutProperties(takeBtnProps, ['label', 'onClick']);
+      restTakeBtnProps = _objectWithoutProperties(takeBtnProps, ["label", "onClick"]);
 
   var classes = useStyles();
 
@@ -127,11 +135,11 @@ var imageUpload = function imageUpload(props) {
     var reader = new FileReader();
     var file = files.target.files[0];
     if (file) {
-      if (!file.type.match('image.*')) {
-        setError('Only image are allowed');
+      if (!file.type.match("image.*")) {
+        setError("Only image are allowed");
         setImage(defaultImage);
       } else if (file.size > 1048576) {
-        setError('File size exceeds (1MB)');
+        setError("File size exceeds (1MB)");
         setImage(defaultImage);
       } else {
         reader.onloadend = function () {
@@ -147,9 +155,9 @@ var imageUpload = function imageUpload(props) {
     if (returnImage instanceof Function) returnImage(image);
   }, [image]);
 
-  var IMAGE_VIEW = _react2.default.createElement('img', { style: styles, alt: '', src: image });
+  var IMAGE_VIEW = _react2.default.createElement("img", { style: styles, alt: "", src: image });
   var WEBCAM = _react2.default.createElement(
-    'div',
+    "div",
     { style: styles },
     _react2.default.createElement(_reactWebcam2.default, {
       style: { margin: 2 },
@@ -158,8 +166,9 @@ var imageUpload = function imageUpload(props) {
       videoConstraints: {
         facingMode: "user"
       },
-      screenshotFormat: 'image/jpeg',
-      width: styles.width - 5, height: styles.height - 5
+      screenshotFormat: "image/jpeg",
+      width: styles.width - 5,
+      height: styles.height - 5
     })
   );
 
@@ -180,7 +189,7 @@ var imageUpload = function imageUpload(props) {
   var camBtnProp = webCam ? restTakeBtnProps : restCameraBtnProps;
 
   return _react2.default.createElement(
-    'div',
+    "div",
     { style: { width: styles.width } },
     _react2.default.createElement(
       _Grid2.default,
@@ -190,8 +199,9 @@ var imageUpload = function imageUpload(props) {
         { item: true, xs: 12 },
         !webCam ? IMAGE_VIEW : WEBCAM,
         error && _react2.default.createElement(
-          'label',
-          { className: 'label-upload' },
+          "label",
+          {
+            className: classes.upload },
           error
         )
       ),
@@ -201,20 +211,29 @@ var imageUpload = function imageUpload(props) {
         webCam ? _react2.default.createElement(
           _Button2.default,
           _extends({
-            variant: 'outlined',
-            color: 'secondary',
+            variant: "outlined",
+            color: "secondary",
             className: classes.button,
             onClick: cancelPhoto
           }, restCancelBtnProps),
           cancelBtnLabel
-        ) : _react2.default.createElement(UploadBtn, { action: handlerImage, uploadProps: restUploadBtnProps, uploadBtnLabel: uploadBtnLabel })
+        ) : _react2.default.createElement(UploadBtn, {
+          action: handlerImage,
+          uploadProps: restUploadBtnProps,
+          uploadBtnLabel: uploadBtnLabel
+        })
       ),
       camera && _react2.default.createElement(
         _Grid2.default,
         { item: true, xs: 6 },
         _react2.default.createElement(
           _Button2.default,
-          _extends({ variant: 'outlined', color: 'inherit', className: classes.button, onClick: takePhoto }, camBtnProp),
+          _extends({
+            variant: "outlined",
+            color: "inherit",
+            className: classes.button,
+            onClick: takePhoto
+          }, camBtnProp),
           webCam ? takeBtnLabel : cameraBtnLabel
         )
       )
@@ -231,16 +250,15 @@ imageUpload.propTypes = {
   cameraBtnProps: _propTypes2.default.object,
   cancelBtnProps: _propTypes2.default.object,
   takeBtnProps: _propTypes2.default.object
-
 };
 imageUpload.defaultProps = {
   styles: { height: 200, width: 200, margin: 2, border: "2px dashed #263238" },
   camera: false,
   defaultImage: "https://thenounproject.com/term/no-image/25683/",
-  uploadBtnProps: { onCLick: function onCLick() {}, label: 'Upload' },
-  cameraBtnProps: { onCLick: function onCLick() {}, label: 'Camera' },
-  cancelBtnProps: { onCLick: function onCLick() {}, label: 'Cancel' },
-  takeBtnProps: { onCLick: function onCLick() {}, label: 'Take' }
+  uploadBtnProps: { onCLick: function onCLick() {}, label: "Upload" },
+  cameraBtnProps: { onCLick: function onCLick() {}, label: "Camera" },
+  cancelBtnProps: { onCLick: function onCLick() {}, label: "Cancel" },
+  takeBtnProps: { onCLick: function onCLick() {}, label: "Take" }
 };
 
 exports.default = imageUpload;
