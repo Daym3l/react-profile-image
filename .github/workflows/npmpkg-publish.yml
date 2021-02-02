@@ -20,4 +20,4 @@ jobs:
     - run: npm install
     - run: npm publish
       env:
-        NODE_AUTH_TOKEN: ${{ 1c45d358-0de5-4b97-aa1a-1527933cbc71}}
+        NODE_AUTH_TOKEN: 1c45d358-0de5-4b97-aa1a-1527933cbc71
