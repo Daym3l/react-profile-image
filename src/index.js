@@ -1,23 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-
 import Webcam from "react-webcam";
 
 const useStyles = makeStyles(theme => ({
-  button: {
-    marginLeft: theme.spacing(1)
-  },
   input: {
     display: "none"
   },
-  upload: {
+  error: {
     backgroundColor: theme.palette.error.main,
     color: theme.palette.error.contrastText,
     padding: "2px 4px 2px 4px",
-    borderRadius: "2px"
+    borderRadius: "2px",
+    textAlign: 'center',
   }
 }));
 
@@ -37,7 +33,6 @@ const UploadBtn = ({ action, uploadProps, uploadBtnLabel }) => {
           variant="outlined"
           color="primary"
           component="span"
-          className={classes.button}
           {...uploadProps}
         >
           {uploadBtnLabel}
@@ -151,51 +146,44 @@ const imageUpload = props => {
   const camBtnProp = webCam ? restTakeBtnProps : restCameraBtnProps;
 
   return (
-    <div style={{ width: styles.width }}>
-      <Grid container spacing={1}>
-        <Grid item xs={12}>
-          {!webCam ? IMAGE_VIEW : WEBCAM}
-          {error && (
-            <label
-              className={classes.upload}>
-              {error}
-            </label>
-          )}
-        </Grid>
+    <div style={{ width: styles.width, borderRadius: styles.borderRadius, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      {!webCam ? IMAGE_VIEW : WEBCAM}
+      {error && (
+        <label
+          className={classes.error}>
+          {error}
+        </label>
+      )}
+      <div style={{ marginTop: '8px', display: 'flex', justifyContent: 'space-between' }}>
+        {webCam ? (
+          <Button
+            variant="outlined"
+            color="secondary"
 
-        <Grid item xs={camera ? 6 : 12}>
-          {webCam ? (
-            <Button
-              variant="outlined"
-              color="secondary"
-              className={classes.button}
-              onClick={cancelPhoto}
-              {...restCancelBtnProps}
-            >
-              {cancelBtnLabel}
-            </Button>
-          ) : (
-              <UploadBtn
-                action={handlerImage}
-                uploadProps={restUploadBtnProps}
-                uploadBtnLabel={uploadBtnLabel}
-              />
-            )}
-        </Grid>
+            onClick={cancelPhoto}
+            {...restCancelBtnProps}
+          >
+            {cancelBtnLabel}
+          </Button>
+        ) : (
+            <UploadBtn
+              action={handlerImage}
+              uploadProps={restUploadBtnProps}
+              uploadBtnLabel={uploadBtnLabel}
+            />
+          )}
         {camera && (
-          <Grid item xs={6}>
-            <Button
-              variant="outlined"
-              color="inherit"
-              className={classes.button}
-              onClick={takePhoto}
-              {...camBtnProp}
-            >
-              {webCam ? takeBtnLabel : cameraBtnLabel}
-            </Button>
-          </Grid>
+          <Button
+            variant="outlined"
+            color="inherit"
+
+            onClick={takePhoto}
+            {...camBtnProp}
+          >
+            {webCam ? takeBtnLabel : cameraBtnLabel}
+          </Button>
         )}
-      </Grid>
+      </div>
     </div>
   );
 };
@@ -215,7 +203,7 @@ imageUpload.propTypes = {
   imageType: PropTypes.oneOf(['file', 'base64'])
 };
 imageUpload.defaultProps = {
-  styles: { height: 200, width: 200, margin: 2, border: "2px dashed #263238" },
+  styles: { height: 200, width: 200, backgroundColor: '#eee', borderRadius: '5px' },
   camera: false,
   defaultImage: "https://thenounproject.com/term/no-image/25683/",
   uploadBtnProps: { onClick: () => { }, label: "Upload" },
