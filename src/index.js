@@ -148,6 +148,7 @@ const imageUpload = props => {
       const imageSrc = webcamRef.current.getScreenshot();
       setWebCamVisibility(false);
       setImage(imageSrc);
+      setError(false);
     }
   };
 
