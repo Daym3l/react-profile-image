@@ -1,6 +1,7 @@
 # Profile Photo Upload with React js
 
 [![Code version](https://img.shields.io/badge/version-1.2.1-blue.svg)](http://www.npmjs.com/package/react-profile-image)
+![Node.js Package](https://github.com/Daym3l/react-profile-image/workflows/Node.js%20Package/badge.svg?branch=master&event=workflow_run)
 
 See the Example [`Profile image`](https://daym3l.github.io/react-profile-image/)
 
