@@ -19,6 +19,10 @@ const App = () => {
         console.log('This Function well never run');
       }
     }}
+    imageType="file"
+    maxImgSize={512000}
+    sizeErrorMsg="Tamaño máximo (500KB)"
+    isNotImgErrorMsg="Imágenes solamente!"
   />;
 };
 

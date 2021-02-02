@@ -14,8 +14,8 @@ const useStyles = makeStyles(theme => ({
     display: "none"
   },
   upload: {
-    backgroundColor: "#f44336",
-    color: "#fff",
+    backgroundColor: theme.palette.error.main,
+    color: theme.palette.error.contrastText,
     padding: "2px 4px 2px 4px",
     borderRadius: "2px"
   }
@@ -56,7 +56,11 @@ const imageUpload = props => {
     uploadBtnProps,
     cameraBtnProps,
     cancelBtnProps,
-    takeBtnProps
+    takeBtnProps,
+    maxImgSize,
+    sizeErrorMsg,
+    isNotImgErrorMsg,
+    imageType
   } = props;
 
   const {
@@ -91,26 +95,31 @@ const imageUpload = props => {
     let file = files.target.files[0];
     if (file) {
       if (!file.type.match("image.*")) {
-        setError("Only image are allowed");
+        setError(isNotImgErrorMsg);
         setImage(defaultImage);
-      } else if (file.size > 1048576) {
-        setError("File size exceeds (1MB)");
+      } else if (file.size > maxImgSize) {
+        setError(sizeErrorMsg);
         setImage(defaultImage);
       } else {
-        reader.onloadend = () => {
-          setImage(reader.result);
+        if (imageType === 'base64') {
+          reader.onloadend = () => {
+            setError(false);
+            setImage(reader.result);
+          };
+          reader.readAsDataURL(file);
+        } else {
           setError(false);
-        };
-        reader.readAsDataURL(file);
+          setImage(file);
+        }
       }
     }
   };
 
   React.useEffect(() => {
-    if (returnImage instanceof Function) returnImage(image);
+    if (returnImage instanceof Function && !error) returnImage(image);
   }, [image]);
 
-  const IMAGE_VIEW = <img style={styles} alt="" src={image} />;
+  const IMAGE_VIEW = <img style={styles} alt="Image preview" src={image} />;
   const WEBCAM = (
     <div style={styles}>
       <Webcam
@@ -199,7 +208,11 @@ imageUpload.propTypes = {
   uploadBtnProps: PropTypes.object,
   cameraBtnProps: PropTypes.object,
   cancelBtnProps: PropTypes.object,
-  takeBtnProps: PropTypes.object
+  takeBtnProps: PropTypes.object,
+  maxImgSize: PropTypes.number,
+  sizeErrorMsg: PropTypes.string,
+  isNotImgErrorMsg: PropTypes.string,
+  imageType: PropTypes.oneOf(['file', 'base64'])
 };
 imageUpload.defaultProps = {
   styles: { height: 200, width: 200, margin: 2, border: "2px dashed #263238" },
@@ -208,7 +221,11 @@ imageUpload.defaultProps = {
   uploadBtnProps: { onClick: () => { }, label: "Upload" },
   cameraBtnProps: { onClick: () => { }, label: "Camera" },
   cancelBtnProps: { onClick: () => { }, label: "Cancel" },
-  takeBtnProps: { onClick: () => { }, label: "Take" }
+  takeBtnProps: { onClick: () => { }, label: "Take" },
+  maxImgSize: 1048576,
+  sizeErrorMsg: 'File size exceeds (1MB)',
+  isNotImgErrorMsg: 'Only image are allowed',
+  imageType: 'base64'
 };
 
 export default imageUpload;
