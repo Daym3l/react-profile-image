@@ -93,9 +93,11 @@ const imageUpload = props => {
       if (!file.type.match("image.*")) {
         setError(isNotImgErrorMsg);
         setImage(defaultImage);
+        setImageFile(null);
       } else if (file.size > maxImgSize) {
         setError(sizeErrorMsg);
         setImage(defaultImage);
+        setImageFile(null);
       } else {
         reader.onloadend = () => {
           if (imageType === 'file') {
