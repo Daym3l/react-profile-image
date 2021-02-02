@@ -148,7 +148,7 @@ const imageUpload = props => {
           {!webCam ? IMAGE_VIEW : WEBCAM}
           {error && (
             <label
-             className={classes.upload}>
+              className={classes.upload}>
               {error}
             </label>
           )}
@@ -166,12 +166,12 @@ const imageUpload = props => {
               {cancelBtnLabel}
             </Button>
           ) : (
-            <UploadBtn
-              action={handlerImage}
-              uploadProps={restUploadBtnProps}
-              uploadBtnLabel={uploadBtnLabel}
-            />
-          )}
+              <UploadBtn
+                action={handlerImage}
+                uploadProps={restUploadBtnProps}
+                uploadBtnLabel={uploadBtnLabel}
+              />
+            )}
         </Grid>
         {camera && (
           <Grid item xs={6}>
@@ -205,10 +205,10 @@ imageUpload.defaultProps = {
   styles: { height: 200, width: 200, margin: 2, border: "2px dashed #263238" },
   camera: false,
   defaultImage: "https://thenounproject.com/term/no-image/25683/",
-  uploadBtnProps: { onCLick: () => {}, label: "Upload" },
-  cameraBtnProps: { onCLick: () => {}, label: "Camera" },
-  cancelBtnProps: { onCLick: () => {}, label: "Cancel" },
-  takeBtnProps: { onCLick: () => {}, label: "Take" }
+  uploadBtnProps: { onClick: () => { }, label: "Upload" },
+  cameraBtnProps: { onClick: () => { }, label: "Camera" },
+  cancelBtnProps: { onClick: () => { }, label: "Cancel" },
+  takeBtnProps: { onClick: () => { }, label: "Take" }
 };
 
 export default imageUpload;
