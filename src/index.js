@@ -81,6 +81,7 @@ const imageUpload = props => {
 
   const classes = useStyles();
   const [image, setImage] = React.useState(defaultImage);
+  const [imagefile, setImageFile] = React.useState(null);
   const [error, setError] = React.useState(false);
   const [webCam, setWebCamVisibility] = React.useState(false);
   let webcamRef = React.createRef();
@@ -96,22 +97,27 @@ const imageUpload = props => {
         setError(sizeErrorMsg);
         setImage(defaultImage);
       } else {
-        if (imageType === 'base64') {
-          reader.onloadend = () => {
-            setError(false);
-            setImage(reader.result);
-          };
-          reader.readAsDataURL(file);
-        } else {
+        reader.onloadend = () => {
+          if (imageType === 'file') {
+            setImageFile(file);
+          }
           setError(false);
-          setImage(file);
-        }
+          setImage(reader.result);
+        };
+        reader.readAsDataURL(file);
       }
     }
   };
 
   React.useEffect(() => {
-    if (returnImage instanceof Function && !error) returnImage(image);
+    if (returnImage instanceof Function && !error) {
+      if (imageType === 'file') {
+        returnImage(imagefile);
+      } else {
+        returnImage(image)
+      }
+    }
+    ;
   }, [image]);
 
   const IMAGE_VIEW = <img style={styles} alt="Image preview" src={image} />;
