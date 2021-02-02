@@ -26,18 +26,18 @@ Need more? See [`sample/src/index.js`](https://github.com/Daym3l/react-profile-i
 import ProfileImage from "react-profile-image";
 
 export default () => {
-	const getImages = (image) => {
-		// Do something with the selected image)
-		console.log(image);
-	};
+  const getImages = image => {
+    // Do something with the selected image)
+    console.log(image);
+  };
 
-	return (
-		<ProfileImage
-			camera
-			returnImage={getImages}
-			uploadBtnProps={{ variant: "contained", label: "Up" }}
-		/>
-	);
+  return (
+    <ProfileImage
+      camera
+      returnImage={getImages}
+      uploadBtnProps={{ variant: "contained", label: "Up" }}
+    />
+  );
 };
 ```
 
