@@ -45,8 +45,8 @@ var useStyles = (0, _makeStyles2.default)(function (theme) {
       display: "none"
     },
     upload: {
-      backgroundColor: "#f44336",
-      color: "#fff",
+      backgroundColor: theme.palette.error.main,
+      color: theme.palette.error.contrastText,
       padding: "2px 4px 2px 4px",
       borderRadius: "2px"
     }
@@ -94,7 +94,11 @@ var imageUpload = function imageUpload(props) {
       uploadBtnProps = props.uploadBtnProps,
       cameraBtnProps = props.cameraBtnProps,
       cancelBtnProps = props.cancelBtnProps,
-      takeBtnProps = props.takeBtnProps;
+      takeBtnProps = props.takeBtnProps,
+      maxImgSize = props.maxImgSize,
+      sizeErrorMsg = props.sizeErrorMsg,
+      isNotImgErrorMsg = props.isNotImgErrorMsg,
+      imageType = props.imageType;
 
   var uploadBtnLabel = uploadBtnProps.label,
       _up = uploadBtnProps.onClick,
@@ -136,26 +140,31 @@ var imageUpload = function imageUpload(props) {
     var file = files.target.files[0];
     if (file) {
       if (!file.type.match("image.*")) {
-        setError("Only image are allowed");
+        setError(isNotImgErrorMsg);
         setImage(defaultImage);
-      } else if (file.size > 1048576) {
-        setError("File size exceeds (1MB)");
+      } else if (file.size > maxImgSize) {
+        setError(sizeErrorMsg);
         setImage(defaultImage);
       } else {
-        reader.onloadend = function () {
-          setImage(reader.result);
+        if (imageType === 'base64') {
+          reader.onloadend = function () {
+            setError(false);
+            setImage(reader.result);
+          };
+          reader.readAsDataURL(file);
+        } else {
           setError(false);
-        };
-        reader.readAsDataURL(file);
+          setImage(file);
+        }
       }
     }
   };
 
   _react2.default.useEffect(function () {
-    if (returnImage instanceof Function) returnImage(image);
+    if (returnImage instanceof Function && !error) returnImage(image);
   }, [image]);
 
-  var IMAGE_VIEW = _react2.default.createElement("img", { style: styles, alt: "", src: image });
+  var IMAGE_VIEW = _react2.default.createElement("img", { style: styles, alt: "Image preview", src: image });
   var WEBCAM = _react2.default.createElement(
     "div",
     { style: styles },
@@ -249,7 +258,11 @@ imageUpload.propTypes = {
   uploadBtnProps: _propTypes2.default.object,
   cameraBtnProps: _propTypes2.default.object,
   cancelBtnProps: _propTypes2.default.object,
-  takeBtnProps: _propTypes2.default.object
+  takeBtnProps: _propTypes2.default.object,
+  maxImgSize: _propTypes2.default.number,
+  sizeErrorMsg: _propTypes2.default.string,
+  isNotImgErrorMsg: _propTypes2.default.string,
+  imageType: _propTypes2.default.oneOf(['file', 'base64'])
 };
 imageUpload.defaultProps = {
   styles: { height: 200, width: 200, margin: 2, border: "2px dashed #263238" },
@@ -258,7 +271,11 @@ imageUpload.defaultProps = {
   uploadBtnProps: { onClick: function onClick() {}, label: "Upload" },
   cameraBtnProps: { onClick: function onClick() {}, label: "Camera" },
   cancelBtnProps: { onClick: function onClick() {}, label: "Cancel" },
-  takeBtnProps: { onClick: function onClick() {}, label: "Take" }
+  takeBtnProps: { onClick: function onClick() {}, label: "Take" },
+  maxImgSize: 1048576,
+  sizeErrorMsg: 'File size exceeds (1MB)',
+  isNotImgErrorMsg: 'Only image are allowed',
+  imageType: 'base64'
 };
 
 exports.default = imageUpload;
