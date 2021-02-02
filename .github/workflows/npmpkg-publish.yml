@@ -18,8 +18,4 @@ jobs:
        with:
         node-version: '10.x'
      - name: Install Dependencies
-       run: |
-        npm install
-        npm run transpile
-        npm version
-        npm publish
+       run:  npm publish
