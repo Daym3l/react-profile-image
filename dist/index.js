@@ -255,10 +255,10 @@ imageUpload.defaultProps = {
   styles: { height: 200, width: 200, margin: 2, border: "2px dashed #263238" },
   camera: false,
   defaultImage: "https://thenounproject.com/term/no-image/25683/",
-  uploadBtnProps: { onCLick: function onCLick() {}, label: "Upload" },
-  cameraBtnProps: { onCLick: function onCLick() {}, label: "Camera" },
-  cancelBtnProps: { onCLick: function onCLick() {}, label: "Cancel" },
-  takeBtnProps: { onCLick: function onCLick() {}, label: "Take" }
+  uploadBtnProps: { onClick: function onClick() {}, label: "Upload" },
+  cameraBtnProps: { onClick: function onClick() {}, label: "Camera" },
+  cancelBtnProps: { onClick: function onClick() {}, label: "Cancel" },
+  takeBtnProps: { onClick: function onClick() {}, label: "Take" }
 };
 
 exports.default = imageUpload;
