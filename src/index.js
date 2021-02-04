@@ -19,16 +19,20 @@ const useStyles = makeStyles(theme => ({
 
 const UploadBtn = ({ action, uploadProps, uploadBtnLabel }) => {
   const classes = useStyles();
+  const randomId = `contained-button-file-${Math.random()}`
   return (
     <React.Fragment>
       <input
         accept="image/*"
         className={classes.input}
-        id="contained-button-file"
+        //id="contained-button-file"
+        id={randomId}
         onChange={action}
         type="file"
       />
-      <label htmlFor="contained-button-file">
+      <label htmlFor={randomId}
+      //htmlFor="contained-button-file"
+      >
         <Button
           variant="outlined"
           color="primary"
