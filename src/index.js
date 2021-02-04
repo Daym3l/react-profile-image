@@ -19,16 +19,20 @@ const useStyles = makeStyles(theme => ({
 
 const UploadBtn = ({ action, uploadProps, uploadBtnLabel }) => {
   const classes = useStyles();
+  const randomId = `contained-button-file-${Math.random()}`
   return (
     <React.Fragment>
       <input
         accept="image/*"
         className={classes.input}
-        id="contained-button-file"
+        //id="contained-button-file"
+        id={randomId}
         onChange={action}
         type="file"
       />
-      <label htmlFor="contained-button-file">
+      <label htmlFor={randomId}
+      //htmlFor="contained-button-file"
+      >
         <Button
           variant="outlined"
           color="primary"
@@ -59,22 +63,22 @@ const imageUpload = props => {
   } = props;
 
   const {
-    label: uploadBtnLabel,
+    label: uploadBtnLabel = 'Upload',
     onClick: _up,
     ...restUploadBtnProps
   } = uploadBtnProps;
   const {
-    label: cameraBtnLabel,
+    label: cameraBtnLabel = 'Camera',
     onClick: _cam,
     ...restCameraBtnProps
   } = cameraBtnProps;
   const {
-    label: cancelBtnLabel,
+    label: cancelBtnLabel = 'Cancel',
     onClick: _can,
     ...restCancelBtnProps
   } = cancelBtnProps;
   const {
-    label: takeBtnLabel,
+    label: takeBtnLabel = 'Take',
     onClick: _tak,
     ...restTakeBtnProps
   } = takeBtnProps;
@@ -84,6 +88,7 @@ const imageUpload = props => {
   const [imagefile, setImageFile] = React.useState(null);
   const [error, setError] = React.useState(false);
   const [webCam, setWebCamVisibility] = React.useState(false);
+  const lastImgRef = React.useRef(defaultImage);
   let webcamRef = React.createRef();
 
   const handlerImage = files => {
@@ -112,15 +117,14 @@ const imageUpload = props => {
   };
 
   React.useEffect(() => {
-    if (returnImage instanceof Function && !error) {
+    if (returnImage instanceof Function && !error && lastImgRef.current !== image) {
       if (imageType === 'file') {
         returnImage(imagefile);
       } else {
         returnImage(image)
       }
-    }
-    ;
-  }, [image]);
+    };
+  }, [image, error]);
 
   const IMAGE_VIEW = <img style={styles} alt="Image preview" src={image} />;
   const WEBCAM = (
