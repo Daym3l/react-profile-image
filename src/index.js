@@ -84,6 +84,7 @@ const imageUpload = props => {
   const [imagefile, setImageFile] = React.useState(null);
   const [error, setError] = React.useState(false);
   const [webCam, setWebCamVisibility] = React.useState(false);
+  const lastImgRef = React.useRef(defaultImage);
   let webcamRef = React.createRef();
 
   const handlerImage = files => {
@@ -112,15 +113,14 @@ const imageUpload = props => {
   };
 
   React.useEffect(() => {
-    if (returnImage instanceof Function && !error) {
+    if (returnImage instanceof Function && !error && lastImgRef.current !== image) {
       if (imageType === 'file') {
         returnImage(imagefile);
       } else {
         returnImage(image)
       }
-    }
-    ;
-  }, [image]);
+    };
+  }, [image, error]);
 
   const IMAGE_VIEW = <img style={styles} alt="Image preview" src={image} />;
   const WEBCAM = (
