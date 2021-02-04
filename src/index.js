@@ -59,22 +59,22 @@ const imageUpload = props => {
   } = props;
 
   const {
-    label: uploadBtnLabel,
+    label: uploadBtnLabel = 'Upload',
     onClick: _up,
     ...restUploadBtnProps
   } = uploadBtnProps;
   const {
-    label: cameraBtnLabel,
+    label: cameraBtnLabel = 'Camera',
     onClick: _cam,
     ...restCameraBtnProps
   } = cameraBtnProps;
   const {
-    label: cancelBtnLabel,
+    label: cancelBtnLabel = 'Cancel',
     onClick: _can,
     ...restCancelBtnProps
   } = cancelBtnProps;
   const {
-    label: takeBtnLabel,
+    label: takeBtnLabel = 'Take',
     onClick: _tak,
     ...restTakeBtnProps
   } = takeBtnProps;
