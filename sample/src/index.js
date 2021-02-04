@@ -21,7 +21,8 @@ const App = () => {
           //label: 'Subir',
           onClick: () => {
             console.log('This Function well never run');
-          }
+          },
+          disabled: true
         }}
         imageType="base64"
         maxImgSize={512000}

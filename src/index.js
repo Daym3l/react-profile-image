@@ -29,6 +29,7 @@ const UploadBtn = ({ action, uploadProps, uploadBtnLabel }) => {
         id={randomId}
         onChange={action}
         type="file"
+        disabled={uploadProps.disabled}
       />
       <label htmlFor={randomId}
       //htmlFor="contained-button-file"
