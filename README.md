@@ -26,9 +26,10 @@ Need more? See [`sample/src/index.js`](https://github.com/Daym3l/react-profile-i
 import ProfileImage from "react-profile-image";
 
 export default () => {
-	const getImages = (image) => {
+	const getImages = (base64Image, fileImage) => {
 		// Do something with the selected image)
-		console.log(image);
+		console.log(base64Image);
+		console.log(fileImage);
 	};
 
 	return (
@@ -43,10 +44,10 @@ export default () => {
 
 # Props
 
-- `styles`: React style object for the img tag.(default:{ height: 200, width: 200, margin: 2, border: "2px dashed #263238"}),
+- `styles`: React style object for the img tag.(default:{ height: 200, width: 200, backgorundColor: '#fff'),
 - `camera`: bool if you want take photos,
 - `defaultImage`: default image for the component,
-- `returnImage`: (required) Callback function that recieves the base64/file photo or image,
+- `returnImage`: (required) Callback function that recieves the image in base64 format as first parameter and file format as second parameter,
 - `uploadBtnProps`: Object of type ButtonProps of material-ui, and "label" property to change the button text. IMPORTANT: "onClick" event will not work here,
 - `cameraBtnProps`: Object of type ButtonProps of material-ui, and "label" property to change the button text. IMPORTANT: "onClick" event will not work here,
 - `cancelBtnProps`: Object of type ButtonProps of material-ui, and "label" property to change the button text. IMPORTANT: "onClick" event will not work here,
@@ -54,7 +55,7 @@ export default () => {
 - `maxImgSize`: Max image size in bytes. (number),
 - `sizeErrorMsg`: Error message to display when the image size is exceeded,
 - `isNotImgErrorMsg`: Error message to display when the selected file to upload is not a image,
-- `imageType`: Defines the type of the image ('base64' | 'file' ) that is going to recieve the "defaultImage(image)" callback function. By default is 'base64'.
+- `clearPreview`: Boolean prop. If it's true the preview is going to have the default image. Default to false.
 
 # Build the example locally
 
