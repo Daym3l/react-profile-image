@@ -8,13 +8,17 @@ const useStyles = makeStyles(theme => ({
   input: {
     display: "none"
   },
-  error: {
+  error: (styles) => ({
     backgroundColor: theme.palette.error.main,
     color: theme.palette.error.contrastText,
     padding: "2px 4px 2px 4px",
+    boxSizing: 'border-box',
     borderRadius: "2px",
     textAlign: 'center',
-  }
+    position: 'absolute',
+    top: `calc(${styles.height}px - calc(6px + 1em))`,
+    width: '100%'
+  })
 }));
 
 const UploadBtn = ({ action, uploadProps, uploadBtnLabel }) => {
@@ -60,7 +64,6 @@ const imageUpload = props => {
     maxImgSize,
     sizeErrorMsg,
     isNotImgErrorMsg,
-    imageType,
     clearPreview,
   } = props;
 
@@ -85,7 +88,7 @@ const imageUpload = props => {
     ...restTakeBtnProps
   } = takeBtnProps;
 
-  const classes = useStyles();
+  const classes = useStyles(styles);
   const [image, setImage] = React.useState(defaultImage);
   const [imagefile, setImageFile] = React.useState(null);
   const [error, setError] = React.useState(false);
@@ -155,7 +158,7 @@ const imageUpload = props => {
   const camBtnProp = webCam ? restTakeBtnProps : restCameraBtnProps;
 
   return (
-    <div style={{ width: styles.width, borderRadius: styles.borderRadius, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+    <div style={{ width: styles.width, borderRadius: styles.borderRadius, display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative' }}>
       {!webCam ? IMAGE_VIEW : WEBCAM}
       {error && (
         <label
@@ -168,7 +171,6 @@ const imageUpload = props => {
           <Button
             variant="outlined"
             color="secondary"
-
             onClick={cancelPhoto}
             {...restCancelBtnProps}
           >

@@ -1,6 +1,6 @@
 # Profile Photo Upload with React js
 
-[![Code version](https://img.shields.io/badge/version-1.3.0-blue.svg)](http://www.npmjs.com/package/react-profile-image)
+[![Code version](https://img.shields.io/badge/version-1.3.1-blue.svg)](http://www.npmjs.com/package/react-profile-image)
 
 See the Example [`Profile image`](https://daym3l.github.io/react-profile-image/)
 
