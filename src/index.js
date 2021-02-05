@@ -29,6 +29,7 @@ const UploadBtn = ({ action, uploadProps, uploadBtnLabel }) => {
         id={randomId}
         onChange={action}
         type="file"
+        disabled={uploadProps.disabled}
       />
       <label htmlFor={randomId}
       //htmlFor="contained-button-file"
@@ -59,7 +60,8 @@ const imageUpload = props => {
     maxImgSize,
     sizeErrorMsg,
     isNotImgErrorMsg,
-    imageType
+    imageType,
+    clearPreview,
   } = props;
 
   const {
@@ -88,7 +90,7 @@ const imageUpload = props => {
   const [imagefile, setImageFile] = React.useState(null);
   const [error, setError] = React.useState(false);
   const [webCam, setWebCamVisibility] = React.useState(false);
-  const lastImgRef = React.useRef(defaultImage);
+  const firstImgRef = React.useRef(defaultImage);
   let webcamRef = React.createRef();
 
   const handlerImage = files => {
@@ -105,9 +107,7 @@ const imageUpload = props => {
         setImageFile(null);
       } else {
         reader.onloadend = () => {
-          if (imageType === 'file') {
-            setImageFile(file);
-          }
+          setImageFile(file);
           setError(false);
           setImage(reader.result);
         };
@@ -117,16 +117,12 @@ const imageUpload = props => {
   };
 
   React.useEffect(() => {
-    if (returnImage instanceof Function && !error && lastImgRef.current !== image) {
-      if (imageType === 'file') {
-        returnImage(imagefile);
-      } else {
-        returnImage(image)
-      }
+    if (returnImage instanceof Function && !error && firstImgRef.current !== image) {
+      returnImage(image, imagefile);
     };
   }, [image, error]);
 
-  const IMAGE_VIEW = <img style={styles} alt="Image preview" src={image} />;
+  const IMAGE_VIEW = <img style={styles} alt="Image preview" src={clearPreview ? firstImgRef.current : image} />;
   const WEBCAM = (
     <div style={styles}>
       <Webcam
@@ -189,7 +185,6 @@ const imageUpload = props => {
           <Button
             variant="outlined"
             color="inherit"
-
             onClick={takePhoto}
             {...camBtnProp}
           >
@@ -213,7 +208,7 @@ imageUpload.propTypes = {
   maxImgSize: PropTypes.number,
   sizeErrorMsg: PropTypes.string,
   isNotImgErrorMsg: PropTypes.string,
-  imageType: PropTypes.oneOf(['file', 'base64'])
+  clearPreview: PropTypes.bool,
 };
 imageUpload.defaultProps = {
   styles: { height: 200, width: 200, backgroundColor: '#eee', borderRadius: '5px' },
@@ -226,7 +221,7 @@ imageUpload.defaultProps = {
   maxImgSize: 1048576,
   sizeErrorMsg: 'File size exceeds (1MB)',
   isNotImgErrorMsg: 'Only image are allowed',
-  imageType: 'base64'
+  clearPreview: false,
 };
 
 export default imageUpload;
