@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "2px",
     textAlign: 'center',
     position: 'absolute',
-    top: `calc(${styles.height}px - calc(6px + 1em))`,
+    top: `calc(${styles.height || 200}px - calc(6px + 1em))`,
     width: '100%'
   })
 }));

@@ -32,6 +32,7 @@ const App = () => {
         camera
         returnImage={getImage}
         clearPreview={clear}
+        styles={{ width: 200 }}
       />
       {images.map((image, idx) => (
         <div key={idx}>
@@ -41,6 +42,7 @@ const App = () => {
             defaultImage={image.img}
             uploadBtnProps={{ disabled: true }}
             cameraBtnProps={{ disabled: true }}
+            styles={{ width: 150, heigth: 150 }}
           />
         </div>
       ))}
