@@ -1,5 +1,5 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+# This workflow will build and publish the package to the npm registry when a release is created
+# For more information see: https://docs.github.com/actions/publishing-packages/publishing-nodejs-packages
 
 name: Node.js Package
 
@@ -10,14 +10,17 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v4
         with:
-          node-version: "12.x"
+          node-version: "20.x"
           registry-url: "https://registry.npmjs.org"
       - run: npm install
-      - run: npm publish
+      - run: npm run build
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM }}
